@@ -1,0 +1,25 @@
+.navigation{
+    font-family: "Raleway", sans-serif;
+    color: rgb(68, 68, 68);
+    font-size: 15px;
+    font-weight: 700;
+}
+// current: "Palatino", Helvetica, sans-serif;
+
+//ok: Arial, Calibri
+// "Raleway", sans-serif;
+.navChange{
+    color: black;
+    background-color: black;
+}
+
+.link{
+    color: inherit;
+    text-decoration: none;
+    padding: 1.5em;
+    font-weight: 0.2;
+}
+
+.logout{
+    cursor: pointer;
+}

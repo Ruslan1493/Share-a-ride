@@ -1,0 +1,91 @@
+.themeWrapper{
+    margin-bottom: 200px;
+}
+
+.layout{
+    margin: 0;
+    height: 50vh;
+    color: whitesmoke;
+    background-image: url('./images/car2.jpg');
+    background-repeat: no-repeat;
+    background-position:unset;
+    opacity: 0.9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// .rideWrapper{
+//     display: block;
+//     margin-bottom: 100rem;
+// }
+
+.layoutBox{
+    width:max-content;
+    height: max-content;
+    letter-spacing: 0.3em;
+    border: 2px solid ivory;
+    a{
+        font-family: -apple-system, gt-eesti;
+        //, gt-eesti, "Helvetica Neue", Helvetica, Arial, sans-serif
+        font-size: 2em;
+        padding: 2em;
+        padding-top: 2em;
+        color: whitesmoke;
+        // text-transform: uppercase;
+        text-decoration: none;
+        letter-spacing: 0.2em;
+    }
+}
+
+.tripWrapper{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .trip{
+        color: rgb(75, 75, 75);
+        min-width: 700px;
+        border-radius: 16px;
+        // box-shadow: 0px 0px 5px grey;
+        box-shadow: 0px 5px 15px grey;
+        border: 1px solid #00000000;
+        padding: 10px;
+        background-color: rgb(255, 255, 255);
+        transition: box-shadow 500ms ease-in-out, border-radius 500ms ease-in-out;
+        font-size: 1.4rem;
+        justify-content: center;
+        text-decoration: none;
+        margin:10px;
+    }
+    .iconUser{
+        background-image: url('./images//user.svg');
+        background-repeat: no-repeat;
+        display: block;
+        width: 20px;
+        height: 20px;
+        margin-top: 5px;
+        position: absolute;
+    }
+    .tripCreator{
+        color: rgb(75, 75, 75);
+        min-width: 700px;
+        border-radius: 16px;
+        box-shadow: 0px 5px 15px grey;
+        border: 1px solid #00000000;
+        padding: 10px;
+        background-color: rgb(165, 250, 179);
+        transition: box-shadow 500ms ease-in-out;
+        font-size: 1.4rem;
+        justify-content: center;
+        text-decoration: none;
+    }
+    .trip:hover{
+        box-shadow: 0px 0px 15px grey;
+    }
+    a{
+        text-decoration: none;
+    }
+}
+

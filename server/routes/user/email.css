@@ -1,0 +1,10 @@
+.hi{
+    background-color: rgb(19, 18, 18);
+    color: rgb(255, 255, 255);
+}
+
+a{
+    padding: 10px;
+    background: yellow;
+    color: teal;
+}

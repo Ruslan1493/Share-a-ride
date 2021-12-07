@@ -1,0 +1,32 @@
+form{
+    margin: 0 auto;
+    width: 40%;
+    padding: 10px;
+    border: 1px solid lavender;
+    border-radius: 10px;
+    button{
+        padding: 1rem;
+        
+    }
+}
+
+h1{
+    font-family: inherit;
+    margin: 2rem 0;
+}
+
+.label{
+    display: block;
+    margin: 15px 0;
+    span {
+        display: block;
+        margin: 10px;
+    }
+    input {
+        border: 1px solid whitesmoke;
+        padding: 1rem;
+    }
+    input:focus {
+        outline: none;
+    }
+}
