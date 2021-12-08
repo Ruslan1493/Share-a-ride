@@ -91,7 +91,7 @@ class App extends Component {
           <header className={this.state.styleNav} >
             <Navigation user={this.state.user} logout={this.logout} />
           </header>
-          <Main signInUser={this.signInUser} userId={this.state.userId} />
+          <Main signInUser={this.signInUser} userId={this.state.userId}  user={this.state.user} />
         </div>
       </BrowserRouter>
     );

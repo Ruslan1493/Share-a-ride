@@ -160,7 +160,7 @@ class Main extends Component {
                 <Switch>
                     <Route exact path='/' render={() => <Theme rides={this.state.rides} userId={this.state.userId} />} />
                     <Route path='/app/create-a-ride/confirm' render={() => <SecondPage />} />
-                    <Route path='/app/details/:id' render={() => <Details userId={this.state.userId} updateRides={this.updateRides} />} />
+                    <Route path='/app/details/:id' render={() => <Details userId={this.state.userId} user={this.props.user} updateRides={this.updateRides} />} />
                     <PrivateRoute component={CreateTrip} userId={this.state.userId} isLoggedIn={this.state.userId} path='/app/create-a-ride' />
                     <Route path='/user/login' render={() => <Login loginUser={this.loginUser} formErrors={this.state.formErrors} />} />
                     <Route path='/user/register' exact render={() => <Register loginUser={this.loginUser} formErrors={this.state.formErrors} />} />

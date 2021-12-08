@@ -58,6 +58,11 @@ const Details = (props) => {
         console.log(inputValues)
     }, [inputValues])
 
+    useEffect(() => {
+        console.log('   passengers ')
+        console.log(passengers)
+    }, [passengers])
+
     function editDetailsHandler(e) {
         e.preventDefault()
         setInputvalues({
@@ -110,16 +115,57 @@ const Details = (props) => {
         }
     }
 
-    function joinARide() {
+    function joinARide(e) {
+        e.preventDefault()
         const userId = props.userId
         fetch(`http://localhost:4000/api/join-a-ride/${id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(userId)
+            body: JSON.stringify({ userId })
         })
-            .then(res => res.json())
+            .then(data => data.json())
+            .then(res => {
+                notify.show(res.message, res.error ? 'error' : 'success')
+                let passengersCopy = passengers.reduce((newArray, passenger) => {
+                    newArray.push(passenger);
+                    return newArray;
+                }, []);
+
+                passengersCopy.push({
+                    username: props.user,
+                    _id: props.userId
+                })
+
+                setPassengers([...passengersCopy])
+
+            })
+            .catch(err => {
+                console.log('Server error with ride update: ', err)
+                notify.show('Server error with ride update: ', 'error')
+            })
+    }
+
+    function unsubscribeFromRide(e) {
+        e.preventDefault()
+        const userId = props.userId
+        fetch(`http://localhost:4000/api/unsubscribe-from-ride/${id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userId })
+        })
+            .then(data => data.json())
             .then(res => {
                 console.log(res)
+                notify.show(res.message, res.error ? 'error' : 'success')
+                let passengersCopy = passengers.reduce((newArray, passenger) => {
+                    if (passenger._id !== props.userId) {
+                        newArray.push(passenger);
+                    }
+                    return newArray;
+                }, []);
+
+                setPassengers([...passengersCopy])
+                console.log(passengers)
             })
             .catch(err => {
                 console.log('Server error with ride update: ', err)
@@ -138,12 +184,15 @@ const Details = (props) => {
                 <li className={style.detailsElement}>Date of the travel: {profileValues.date}</li>
                 <li className={style.detailsElement}>Seats in the car for passengers: {profileValues.carCapacity}</li>
                 <li className={style.detailsElement}>Number of stops: {profileValues.numberOfStops}</li>
-                <li className={style.detailsElement}>Passengers: {passengers.length > 0 ? passengers.map(p => p.username) : 'No passengers yet'}</li>
+                <li className={style.detailsElement}>Passengers: {passengers && passengers.length > 0 ? passengers.map(p => p.username).join(', ') : 'No passengers yet'}</li>
                 {isCreator
                     ? <button onClick={editDetailsHandler}>Edit</button>
                     :
                     props.userId
-                        ? <button onClick={joinARide}>Join a ride</button>
+                        ?
+                        passengers.map(p => p._id).includes(props.userId)
+                            ? <button onClick={unsubscribeFromRide}>Unsubscribe from the ride</button>
+                            : <button onClick={joinARide}>Join a ride</button>
                         : null
                 }
                 {editModeOn
