@@ -191,8 +191,8 @@ const Details = (props) => {
                     props.userId
                         ?
                         passengers.map(p => p._id).includes(props.userId)
-                            ? <button onClick={unsubscribeFromRide}>Unsubscribe from the ride</button>
-                            : <button onClick={joinARide}>Join a ride</button>
+                            ? <button className={style.buttonDetails} onClick={unsubscribeFromRide}>Unsubscribe from the ride</button>
+                            : <button className={style.buttonDetails} onClick={joinARide}>Join a ride</button>
                         : null
                 }
                 {editModeOn

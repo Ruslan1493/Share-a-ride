@@ -17,3 +17,16 @@
     font-size: 1.3em;
     font-family:'Times New Roman', Times, serif;
 }
+
+.buttonDetails{
+    padding: 5px;
+    background-color: rgb(100, 165, 3);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    margin: 20px;
+    &:hover{
+        background-color: rgb(140, 184, 66);
+        transition: background-color 1000ms linear;
+    }
+}
