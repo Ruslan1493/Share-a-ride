@@ -24,14 +24,13 @@ class Navigation extends Component {
                             <span>
                                 <Link to='/user/login' className={style.link}>Login</Link>
                                 <Link to='/user/register' className={style.link}>Register</Link>
-                                <Link to='/check' className={style.link}>Check</Link>
                             </span>
                         )
                         :
                         <span>
                             <Link to='/user/profile' className={style.link}>Profile</Link>
                             <span className={style.logout} onClick={(e) => this.props.logout(e)}>Logout</span>
-                            <span> Welcome, {this.props.user}</span>
+                            <span className={style.welcome}> Welcome, {this.props.user}</span>
                         </span>
                 }
             </nav>

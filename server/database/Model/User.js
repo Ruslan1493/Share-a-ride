@@ -21,6 +21,7 @@ const Schema = mongoose.Schema({
     numberOfTrips: { type: mongoose.SchemaTypes.Number, default: 0 },
     numberOfDrives: { type: mongoose.SchemaTypes.Number, default: 0 },
     lastModifiedDate: { type: mongoose.SchemaTypes.Date, default: Date.now },
+    madeTrips: [{ type: mongoose.SchemaTypes.ObjectId, default: [] }],
 })
 
 const User = new mongoose.model('User', Schema)

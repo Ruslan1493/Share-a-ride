@@ -26,7 +26,7 @@ function ConfirmRegister(props) {
         props.history.push('/app/create-a-ride')
     })
     .catch(err => {
-        console.error('something happened duriung conf reg:')
+        console.error('something happened during conf reg:')
         console.error(err)
     })
     return(

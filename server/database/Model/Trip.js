@@ -7,6 +7,7 @@ const Schema = mongoose.Schema({
     carCapacity: { type: mongoose.SchemaTypes.Number, required: true },
     numberOfStops: { type: mongoose.SchemaTypes.Number, required: true },
     creator: { type: mongoose.SchemaTypes.ObjectId, ref: 'User', required: true },
+    tripPassed: { type: mongoose.SchemaTypes.Boolean, default: false },
     passengers: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'User', default: [] }],
 })
 

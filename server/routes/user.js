@@ -4,11 +4,13 @@ const register = require('./user/register/register')
 const confirmRegister = require('./user/register/confirmRegister')
 const login = require('./user/login')
 const getUser = require('./user/getUser')
+const getUserProfile = require('./user/getUserProfile')
 
 router.post('/register/confirm', confirmRegister)
 router.post('/register', register)
 router.post('/login', login)
 router.get('/:id', getUser)
+router.use('/profile', getUserProfile)
 
 module.exports = router
 

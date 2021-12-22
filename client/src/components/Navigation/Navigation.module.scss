@@ -18,8 +18,19 @@
     text-decoration: none;
     padding: 1.5em;
     font-weight: 0.2;
+    &:hover{
+        background-color: rgb(120, 206, 141);
+        border-radius: 20px;
+        color: rgb(255, 255, 255);
+        transition: background-color 200ms ease;
+    }
+    
 }
 
 .logout{
     cursor: pointer;
+}
+
+.welcome{
+    margin: 0 0 0 20px;
 }
