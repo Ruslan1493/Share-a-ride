@@ -5,8 +5,6 @@ import { DateErrorHandler } from '../Error-handler/Error-handler'
 
 function FirstPage(props) {
 
-    console.log("FirstPage")
-    console.log()
     let [cityFromValue, setCityFromValue] = useState('')
     let [cityToValue, setCityToValue] = useState('')
     let [dateSelected, setDateSelected] = useState('')
@@ -22,17 +20,7 @@ function FirstPage(props) {
         const currentDateMonth = currentDateNow.getMonth() + 1
         const currentDateYear = currentDateNow.getFullYear()
         const currentDate = currentDateDay + '/' + currentDateMonth + '/' + currentDateYear
-        // console.log(selectedDate)
-        // console.log(currentDate)
-        // console.log(currentDateMonth)
-        // console.log(currentDateYear)
-        // if(currentDate > selectedDate){
-        //     return 'error'
-        // }
-        //use date format
-        //https://stackoverflow.com/questions/3552461/how-to-format-a-javascript-date
-
-        console.log('curre date  ', currentDate)
+   
         const { hasError, errorMessage } = errorhandler.checkDate(currentDate, selectedDate)
         setDateSelected(selectedDate)
         seterrorMessage(errorMessage)

@@ -7,9 +7,6 @@ const Theme = (props) => {
     let [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
-        console.log('current user id: ', props.userId)
-        console.log('curre ride info', props.rides)
-        // console.log(props.rides)
         setIsLoaded(true)
         setRides(() => props.rides)
     })

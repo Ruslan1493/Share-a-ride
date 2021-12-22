@@ -54,13 +54,9 @@ const Details = (props) => {
     }, [props.userId])
 
     useEffect((state) => {
-        console.log('   use effect 2 ', state)
-        console.log(inputValues)
     }, [inputValues])
 
     useEffect(() => {
-        console.log('   passengers ')
-        console.log(passengers)
     }, [passengers])
 
     function editDetailsHandler(e) {

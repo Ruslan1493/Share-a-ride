@@ -23,10 +23,13 @@ class App extends Component {
   componentDidMount() {
     if (!this.state.user && cookie.load('user_data')) {
       const cookieToken = jwt.decode(cookie.load('user_data'))
+      console.log('App coolkie data')
+      console.log(cookieToken)
       if (cookieToken) {
         fetch('http://localhost:4000/user/' + cookieToken.data.id)
           .then(user => user.json())
           .then(user => {
+            console.log('APP called server for user check!')
             this.setState({
               user: user.data.username,
               userId: user.data.id
@@ -39,9 +42,9 @@ class App extends Component {
     }
   }
 
-  static getDerivedStateFromProps(props, state) {
-    return null
-}
+  componentDidUpdate(){
+
+  }
 
   signInUser(username, userId) {
     this.setState({
@@ -67,7 +70,7 @@ class App extends Component {
           <header className={this.state.styleNav} >
             <Navigation user={this.state.user} logout={this.logout} />
           </header>
-          <Main signInUser={this.signInUser} userId={this.state.userId}  user={this.state.user} />
+          <Main signInUser={this.signInUser} userId={this.state.userId} user={this.state.user} />
         </div>
       </BrowserRouter>
     );

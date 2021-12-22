@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Redirect } from 'react-router'
 import Notifications, { notify } from 'react-notify-toast'
-// import Calendar from '../Calendar/Custom-calendar'
 import style from './Create-trip.module.scss'
 import { DateErrorHandler } from '../Error-handler/Error-handler'
 import { createFormErrorHandler } from '../Error-handler/Error-handler' 
 import SecondPage from './SecondPage'
 import FirstPage from './FirstPage'
+import { createARide } from '../../services/api'
 
 class CreateTrip extends Component {
     constructor(props) {
@@ -23,16 +23,14 @@ class CreateTrip extends Component {
             errorMessage: '',
             userId: null
         }
-        // this.saveDate = this.saveDate.bind(this)
         this.createFirstPageTripFunc = this.createFirstPageTripFunc.bind(this)
-        this.createTripFunc = this.createTripFunc.bind(this)
+        this.createSecondPageTripFunc = this.createSecondPageTripFunc.bind(this)
         this.onChangeValue = this.onChangeValue.bind(this)
         this.hasDateInputError = this.hasDateInputError.bind(this)
-        // this.createFormErrorHandler = this.createFormErrorHandler.bind(this)
     }
 
     componentDidMount() {
-        console.log('CREATE FUND PROPS: ', this.props)
+        console.log(this.props)
         this.setState({
             userId: this.props.userId
         })
@@ -52,7 +50,7 @@ class CreateTrip extends Component {
         }
     }
 
-    createTripFunc(e) {
+    createSecondPageTripFunc(e) {
         e.preventDefault()
 
         const carCapacity = e.target.carCapacity.value
@@ -66,23 +64,13 @@ class CreateTrip extends Component {
         } = this.state
         console.log('DATE:')
         console.log(date)
-        fetch('http://localhost:4000/api/create-a-ride', {
-            method: 'POST',
-            body: JSON.stringify({
-                cityFrom,
-                cityTo,
-                date,
-                carCapacity,
-                numberOfStops,
-                creator
-            }),
-            headers: { 'Content-Type': 'application/json' },
-        })
-            .then(res => res.json())
+        createARide(cityFrom, cityTo, date, carCapacity, numberOfStops, creator)
             .then(data => {
                 notify.show(data.message, 'success')
                 console.log('created ride!')
-                console.log(data)
+                console.log(this.props)
+                this.props.updateRides()
+                this.props.history.push('/')
             })
             .catch(err => {
                 console.log('Error with creating the ride ', err)
@@ -112,7 +100,7 @@ class CreateTrip extends Component {
                     {
                         !this.state.isFirstPage
                             ?
-                            <SecondPage createTripFunc={this.createTripFunc} />
+                            <SecondPage createTripFunc={this.createSecondPageTripFunc} />
                             :
                             <FirstPage
                                 createFirstPageTripFunc={this.createFirstPageTripFunc}

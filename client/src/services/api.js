@@ -42,3 +42,20 @@ export function signinUser(e, isRegister) {
     })
         .then(data => data.json())
 }
+
+
+export function createARide(cityFrom, cityTo, date, carCapacity, numberOfStops, creator) {
+    return fetch('http://localhost:4000/api/create-a-ride', {
+        method: 'POST',
+        body: JSON.stringify({
+            cityFrom,
+            cityTo,
+            date,
+            carCapacity,
+            numberOfStops,
+            creator
+        }),
+        headers: { 'Content-Type': 'application/json' },
+    })
+        .then(res => res.json())
+}

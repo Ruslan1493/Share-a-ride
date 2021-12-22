@@ -11,7 +11,6 @@ import Login from '../User/Login/Login'
 import Register from '../User/Register/Register'
 import Profile from '../User/Profile'
 import style from './Main.module.scss'
-import ConfirmRegister from '../User/Confirm Register/ConfirmRegister'
 import SecondPage from '../CreateTrip/SecondPage'
 import Details from '../Details/Details';
 import { getAllRides, signinUser } from '../../services/api'
@@ -48,6 +47,9 @@ class Main extends Component {
     }
 
     static getDerivedStateFromProps(props, state) {
+        // console.log('In main getDerivedStateFromProps:')
+        // console.log(state.userId)
+        // console.log(props.userId)
         state.userId = props.userId
         return state.userId
     }
@@ -67,10 +69,12 @@ class Main extends Component {
                     this.setState({
                         formErrors: []
                     })
+                    console.log('Registerd!')
+                    console.log('userData!: ', userData)
                     notify.show(userData.data.message, 'success')
                     const token = createToken(userData)
                     cookie.save('user_data', token)
-                    this.props.signInUser(userData.data.username, userData.data.id)
+                    this.props.signInUser(userData.data.user.username, userData.data.user._id)
                     this.setState({ userId: userData.data.id })
                     this.props.history.push('/app/create-a-ride')
                 }
@@ -99,8 +103,12 @@ class Main extends Component {
                 <Notifications options={{ top: '50px', transition: 3 }} />
                 <Switch>
                     <Route exact path='/' render={() => <Theme rides={this.state.rides} userId={this.state.userId} />} />
-                    <Route path='/app/create-a-ride/confirm' render={() => <SecondPage />} />
-                    <PrivateRoute component={CreateTrip} userId={this.state.userId} isLoggedIn={this.state.userId} path='/app/create-a-ride' />
+                    <PrivateRoute component={CreateTrip}
+                        userId={this.state.userId}
+                        isLoggedIn={this.state.userId}
+                        updateRides={this.updateRides}
+                        path='/app/create-a-ride' />
+                    <PrivateRoute component={SecondPage} udateRides={this.updateRides} path='/app/create-a-ride/confirm' />
                     <Route path='/app/details/:id' render={() => <Details userId={this.state.userId} user={this.props.user} updateRides={this.updateRides} />} />
                     <Route path='/user/login' render={() => <Login loginUser={this.loginUser} formErrors={this.state.formErrors} />} />
                     <Route path='/user/register' exact render={() => <Register loginUser={this.loginUser} formErrors={this.state.formErrors} />} />

@@ -37,9 +37,7 @@ router.post('/login', async (req, res) => {
               res.status(200).send(JSON.stringify({
                 data: {
                   message: `Welcome, ${user.username}`,
-                  username: user.username,
-                  email: user.email,
-                  id: user._id
+                  user
                 }
               }))
               console.log(`Logging... the user was found: ${user}`)
