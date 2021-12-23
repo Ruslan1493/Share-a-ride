@@ -26,7 +26,7 @@ class CreateTrip extends Component {
         this.createFirstPageTripFunc = this.createFirstPageTripFunc.bind(this)
         this.createSecondPageTripFunc = this.createSecondPageTripFunc.bind(this)
         this.onChangeValue = this.onChangeValue.bind(this)
-        this.hasDateInputError = this.hasDateInputError.bind(this)
+        // this.hasDateInputError = this.hasDateInputError.bind(this)
     }
 
     componentDidMount() {
@@ -39,8 +39,12 @@ class CreateTrip extends Component {
     createFirstPageTripFunc(e, cityFrom, cityTo, date) {
         e.preventDefault();
         console.log('DATE', date)
-        if (this.state.hasError) {
-            notify.show(this.state.errorMessage, 'error')
+        const dateError = this.state.errorH.checkDate(date)
+        console.log('dateError: ', dateError.hasError)
+        if (this.state.hasError || dateError.hasError) {
+            console.log('state error', this.state.hasError)
+
+            notify.show('Please fill all the fields correctly', 'error')
         } else {
             const currentUserId = this.props.userId
             if (currentUserId === null) {
@@ -77,11 +81,12 @@ class CreateTrip extends Component {
             })
     }
 
-    hasDateInputError(hasError, errorMessage) {
-        if (hasError) {
-            this.setState({ hasError, errorMessage })
-        }
-    }
+    // hasDateInputError(hasError, errorMessage) {
+    //     if (hasError) {
+    //         console.log('HAS error:', hasError)
+    //         this.setState({ hasError, errorMessage })
+    //     }
+    // }
 
     onChangeValue(e) {
         e.preventDefault()

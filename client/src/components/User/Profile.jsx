@@ -20,14 +20,14 @@ const Profile = ({ userId }) => {
                 let tripsPassedAndNotCreatedByUser = trips.filter(trip => trip.creator._id !== userId && trip.tripPassed)
                 if (tripsActiveAndCreatedByUser.length > 0) {
                     setActiveTripsAsCreator(tripsActiveAndCreatedByUser)
-                } 
+                }
                 if (tripsPassedAndCreatedByUser.length > 0) {
                     setPassedTripsAsCreator(tripsPassedAndCreatedByUser)
-                } 
+                }
                 if (tripsActiveAndNotCreatedByUser.length > 0) {
                     setActiveTripsAsPassenger(tripsActiveAndNotCreatedByUser)
-                } 
-                if(tripsPassedAndNotCreatedByUser.length > 0) {
+                }
+                if (tripsPassedAndNotCreatedByUser.length > 0) {
                     setPassedTripsAsPassenger(tripsPassedAndNotCreatedByUser)
                 }
             })
@@ -38,14 +38,14 @@ const Profile = ({ userId }) => {
         <article>
             <h1>Profile</h1>
             <div>
-                <p>Active trips as a driver:</p>
+                <h2>Active trips as a driver:</h2>
                 {
                     activeTripsAsCreator && activeTripsAsCreator.length > 0
                         ?
                         <ul>
                             {
                                 activeTripsAsCreator && activeTripsAsCreator.length > 0 ? activeTripsAsCreator.map(trip =>
-                                    <li>
+                                    <li key={trip._id}>
                                         <p>Driver: {trip.creator.username}</p>
                                         <p>From: {trip.cityFrom}</p>
                                         <p>To: {trip.cityTo}</p>
@@ -57,14 +57,14 @@ const Profile = ({ userId }) => {
                         :
                         null
                 }
-                <p>Active trips as a passenger:</p>
+                <h2>Active trips as a passenger:</h2>
                 {
                     activeTripsAsPassenger
                         ?
                         <ul>
                             {
                                 activeTripsAsPassenger && activeTripsAsPassenger.length > 0 ? activeTripsAsPassenger.map(trip =>
-                                    <li>
+                                    <li key={trip._id}>
                                         <p>Driver: {trip.creator.username}</p>
                                         <p>From: {trip.cityFrom}</p>
                                         <p>To: {trip.cityTo}</p>
@@ -76,14 +76,14 @@ const Profile = ({ userId }) => {
                         :
                         null
                 }
-                <p>Passed trips as a driver:</p>
+                <h2>Passed trips as a driver:</h2>
                 {
                     passedTripsAsCreator
                         ?
                         <ul>
                             {
                                 passedTripsAsCreator && passedTripsAsCreator.length > 0 ? passedTripsAsCreator.map(trip =>
-                                    <li>
+                                    <li key={trip._id}>
                                         <p>Driver: {trip.creator.username}</p>
                                         <p>From: {trip.cityFrom}</p>
                                         <p>To: {trip.cityTo}</p>
@@ -95,14 +95,14 @@ const Profile = ({ userId }) => {
                         :
                         null
                 }
-                <p>Passed trips as passenger:</p>
+                <h2>Passed trips as passenger:</h2>
                 {
                     passedTripsAsPassenger
                         ?
                         <ul>
                             {
                                 passedTripsAsPassenger && passedTripsAsPassenger.length > 0 ? passedTripsAsPassenger.map(trip =>
-                                    <li>
+                                    <li key={trip._id}>
                                         <p>Driver: {trip.creator.username}</p>
                                         <p>From: {trip.cityFrom}</p>
                                         <p>To: {trip.cityTo}</p>

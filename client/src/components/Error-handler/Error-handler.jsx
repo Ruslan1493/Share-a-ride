@@ -1,12 +1,17 @@
 import { notify } from 'react-notify-toast'
 
 export class DateErrorHandler {
-    checkDate(currentDate, selectedDate) {
+    checkDate(selectedDate) {
         // const [ day, month, year ] = currentDate.split('/')
         let errorObject = {
             hasError: false,
             errorMessage: ''
         }
+        const currentDateNow = new Date()
+        const currentDateDay = currentDateNow.getDate()
+        const currentDateMonth = currentDateNow.getMonth() + 1
+        const currentDateYear = currentDateNow.getFullYear()
+        const currentDate = currentDateDay + '/' + currentDateMonth + '/' + currentDateYear
         const day = Number(currentDate.split('/')[0])
         const month = Number(currentDate.split('/')[1])
         const year = Number(currentDate.split('/')[2])
@@ -23,6 +28,10 @@ export class DateErrorHandler {
             errorObject.errorMessage = 'You cannot select past dates'
             console.log('Error handler:')
             console.log(errorObject)
+            console.log(selectedYear+'/'+selectedMonth+'/'+selectedDay)
+ 
+            console.log(year+'/'+month+'/'+day)
+
             return errorObject
         }
 
@@ -57,7 +66,9 @@ export function editFormErrorHandler({ cityFrom, cityTo, date, carCapacity, numb
         return true
     }
     if (date === '' || date.length !== 10 || !date.match('(^[0-9]{2}/[0-9]{2}/[0-9]{4}$)')) {
-        
+        console.log('IN DATE ERROR handler')
+        console.log(date)
+        console.log(!date.match('(^[0-9]{2}/[0-9]{2}/[0-9]{4}$)'))
         notify.show('Please enter correct date in the format "dd/mm/yyyy"', 'error')
         return true
     }

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import style from '../CreateTrip/Create-trip.module.scss'
 import Calendar from '../Calendar/Custom-calendar'
 import { DateErrorHandler } from '../Error-handler/Error-handler'
+import { useEffect } from 'react'
 
 function FirstPage(props) {
 
@@ -11,20 +12,25 @@ function FirstPage(props) {
     let [errorMessage, seterrorMessage] = useState('')
     let [errorhandler, seterrorhandler] = useState(new DateErrorHandler())
 
+    useEffect(()=>{
+
+    }, [dateSelected])
+
     let saveDate = (e, value) => {
         e.preventDefault()
 
         const selectedDate = e.target.innerText + '/' + value.selectedDate
-        const currentDateNow = new Date()
-        const currentDateDay = currentDateNow.getDate()
-        const currentDateMonth = currentDateNow.getMonth() + 1
-        const currentDateYear = currentDateNow.getFullYear()
-        const currentDate = currentDateDay + '/' + currentDateMonth + '/' + currentDateYear
+       
    
-        const { hasError, errorMessage } = errorhandler.checkDate(currentDate, selectedDate)
+        const { hasError, errorMessage } = errorhandler.checkDate(selectedDate)
+        console.log('IN SAVE DATE')
         setDateSelected(selectedDate)
+        console.log('SELECTED DATE: ', selectedDate)
+        console.log('Has error in save date: ', hasError)
         seterrorMessage(errorMessage)
-        props.hasDateInputError(hasError, errorMessage)
+        if(hasError){
+            // props.hasDateInputError(hasError, errorMessage)
+        }
     }
 
     return (
